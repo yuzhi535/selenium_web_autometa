@@ -4,7 +4,7 @@ from PIL import Image
 from io import BytesIO
 
 def main():
-    st.title("Website Visualizer")
+    st.title("Website Content Exctractor")
     
     # Get website URL from user input
     url = st.text_input("Enter a URL:", "")
@@ -23,7 +23,7 @@ def visualize(url):
             innerHTML = take_screenshot(url)
             st.subheader("Website preview:")
             if innerHTML:
-                st.Image(innerHTML)
+                st.image(innerHTML)
             else:
                 st.error("Error: empty html")
     
