@@ -1,5 +1,5 @@
 import streamlit as st
-from extract import take_screenshot
+from extract import take_webdata
 from PIL import Image
 from io import BytesIO
 
@@ -20,12 +20,18 @@ def visualize(url):
     # Fetch and display the website content
         with st.spinner("loading website data ..."):
             # innerHTML = get_innerHTML(url)
-            innerHTML = take_screenshot(url)
-            st.subheader("Website preview:")
-            if innerHTML:
-                st.image(innerHTML)
+            html_image, html_content = take_webdata(url)
+            if html_content:
+                st.info(html_content)
             else:
-                st.error("Error: empty html")
+                st.error("Error: empty html content")
+            st.subheader("Website preview:")
+            if html_image:
+                st.image(html_image)
+            else:
+                st.error("Error: empty html preview")
+            st.subheader("Website title:")
+                       
     
     except Exception as e:
         st.error(f"Error: {e}")
