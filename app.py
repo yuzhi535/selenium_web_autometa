@@ -1,6 +1,7 @@
 import streamlit as st
 from extract import take_screenshot
 from PIL import Image
+from io import BytesIO
 
 def main():
     st.title("Website Visualizer")

@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from PIL import Image
+from io import BytesIO
 
 def take_screenshot(url):
     options = webdriver.ChromeOptions()
