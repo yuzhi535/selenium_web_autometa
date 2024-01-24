@@ -21,6 +21,7 @@ def visualize(url):
         with st.spinner("loading website data ..."):
             # innerHTML = get_innerHTML(url)
             html_image, html_content = take_webdata(url)
+            st.subheader("Website title:")
             if html_content:
                 st.info(html_content)
             else:
@@ -30,8 +31,7 @@ def visualize(url):
                 st.image(html_image)
             else:
                 st.error("Error: empty html preview")
-            st.subheader("Website title:")
-                       
+                                   
     
     except Exception as e:
         st.error(f"Error: {e}")
