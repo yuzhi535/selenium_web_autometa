@@ -67,7 +67,7 @@ class Imagecopyer(QWidget):
         self.zoom_out_button.clicked.connect(self.zoom_out)
 
         self.input_edit = QLineEdit(self)
-        self.input_edit.setPlaceholderText("请输入目标文件夹编号")
+        self.input_edit.setPlaceholderText("请输入目标文件夹的父文件夹")
 
         self.copy_button = QPushButton("复制", self)
         self.copy_button.clicked.connect(self.move_image)
@@ -175,7 +175,10 @@ class Imagecopyer(QWidget):
             return
 
         # 获取要处理图片文件夹的父目录
-        parent_folder = os.path.dirname(self.image_folder)
+        if self.input_edit.text == '':
+            parent_folder = os.path.dirname(self.image_folder)
+        else:
+            parent_folder = self.input_edit.text
         target_folder = os.path.join(parent_folder, target_folder_num)
 
         if not os.path.exists(target_folder):

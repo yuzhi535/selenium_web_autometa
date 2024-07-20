@@ -1,13 +1,57 @@
----
-title: Selenium Web Scrape
-emoji: 📚
-colorFrom: gray
-colorTo: indigo
-sdk: streamlit
-sdk_version: 1.30.0
-app_file: app.py
-pinned: false
-license: apache-2.0
----
+## 图片预览和分类工具
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+这是一个基于 PyQt5 的图形界面工具，用于快速预览和分类图片。
+
+### 功能
+
+- **图片预览**:  浏览文件夹中的图片，支持上一张、下一张、放大、缩小等操作。
+- **快捷键**: 使用 `j` 键和 `k` 键快速切换图片，使用 `Enter` 键确认复制操作。
+- **图片分类**:  通过输入数字键 (1, 2...) 将当前图片复制到指定的目标文件夹，目标文件夹位于图片源文件夹的父目录下，以数字命名。
+
+### 使用方法
+
+1. **选择文件夹**: 点击 "选择文件夹" 按钮，选择包含要处理图片的文件夹。
+2. **预览图片**: 使用 "上一张"、"下一张"、"放大"、"缩小" 按钮或 `j`、`k` 快捷键浏览图片。
+3. **复制图片**: 
+    - 在输入框中输入目标文件夹的编号 (例如，输入 "1" 表示复制到名为 "1" 的文件夹)。
+    - 按下 `Enter` 键或点击 "复制" 按钮，将当前图片复制到目标文件夹，并自动切换到下一张图片。
+    - 你也可以直接按下数字键 (1, 2...) 将图片快速复制到对应的文件夹。
+
+### 示例
+
+假设你有一个名为 "Photos" 的文件夹，其中包含要分类的图片，该文件夹位于 "D:\MyPictures" 目录下。
+
+1. 运行程序，点击 "选择文件夹" 按钮，选择 "D:\MyPictures\Photos" 文件夹。
+2. 程序会显示 "Photos" 文件夹中的第一张图片。
+3. 预览图片，并根据需要进行放大或缩小。
+4. 如果你想将当前图片复制到 "D:\MyPictures\1" 文件夹，可以直接按下数字键 `1`，或在输入框中输入 "1" 后按下 `Enter` 键。
+5. 程序会将当前图片复制到 "D:\MyPictures\1" 文件夹，并自动加载下一张图片。
+
+### 依赖
+
+- Python 3.x
+- PyQt5
+- os
+- shutil
+
+### 安装依赖
+
+```bash
+pip install PyQt5
+```
+
+### 运行程序
+
+```bash
+python main.py 
+```
+
+### 注意
+
+- 目标文件夹会自动创建，无需手动创建。
+- 程序会将图片 **复制** 到目标文件夹，不会删除原始图片。
+
+
+## 许可证
+
+[MIT](https://choosealicense.com/licenses/mit/)
