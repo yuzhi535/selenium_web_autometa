@@ -41,6 +41,7 @@ class Imagecopyer(QWidget):
         self.setWindowTitle("图片预览和复制")
         
         self.last_pic_path=[]
+        self.parent_folder=None
 
         self.image_label = QLabel(self)
         self.image_label.setAlignment(Qt.AlignCenter)
@@ -66,11 +67,12 @@ class Imagecopyer(QWidget):
         self.zoom_out_button = QPushButton("缩小", self)
         self.zoom_out_button.clicked.connect(self.zoom_out)
 
-        self.input_edit = QLineEdit(self)
-        self.input_edit.setPlaceholderText("请输入目标文件夹的父文件夹")
+        self.parent_path = QLineEdit(self)
+        self.parent_path.setPlaceholderText("目标文件夹的父文件夹")
+        self.parent_path.setReadOnly(True)
 
-        self.copy_button = QPushButton("复制", self)
-        self.copy_button.clicked.connect(self.move_image)
+        self.copy_button = QPushButton("选择目标文件夹的父文件夹", self)
+        self.copy_button.clicked.connect(self.make_parent)
         self.copy_button.setShortcut('Enter')
         
         self.undo_button = QPushButton("撤销", self)
@@ -87,7 +89,7 @@ class Imagecopyer(QWidget):
         hbox1.addWidget(self.undo_button)
 
         hbox2 = QHBoxLayout()
-        hbox2.addWidget(self.input_edit)
+        hbox2.addWidget(self.parent_path)
         hbox2.addWidget(self.copy_button)
 
         vbox = QVBoxLayout()
@@ -102,6 +104,12 @@ class Imagecopyer(QWidget):
         self.shortcut_1.activated.connect(lambda: self.move_image("1"))
         self.shortcut_2 = QShortcut(QKeySequence("2"), self)
         self.shortcut_2.activated.connect(lambda: self.move_image("2"))
+    
+    def make_parent(self):
+        folder_path = QFileDialog.getExistingDirectory(self, "选择目标父文件夹")
+        self.parent_folder = folder_path
+        self.parent_path.setText(self.parent_folder)
+
 
     def select_folder(self):
         folder_path = QFileDialog.getExistingDirectory(self, "选择图片文件夹")
@@ -120,7 +128,7 @@ class Imagecopyer(QWidget):
         self.current_image_index-=1
         os.remove(self.last_pic_path[-1])
         self.last_pic_path.pop()
-        print(f'undo！ {self.current_image_index}/{len(self.image_files)}')
+        print(f'undo！ {self.current_image_index+1}/{len(self.image_files)}')
         self.load_current_image()
 
     def load_current_image(self):
@@ -137,10 +145,11 @@ class Imagecopyer(QWidget):
             self.image_folder, self.image_files[self.current_image_index]
         )
         if self.current_image_index < len(os.listdir(self.image_folder)):
+            self.image_files.pop(self.current_image_index)
             os.remove(current_image_path)
-            self.current_image_index+=1
+            # self.current_image_index+=1
             self.load_current_image()
-            print(f'delete! {self.current_image_index}/{len(self.image_files)}')
+            print(f'delete! {self.current_image_index+1}/{len(self.image_files)}')
         else:
             print('最后一张图片已被删除')  # 只过一轮得了
     
@@ -157,28 +166,23 @@ class Imagecopyer(QWidget):
         if self.current_image_index > 0:
             self.current_image_index -= 1
             self.load_current_image()
-        print(f'previous! {self.current_image_index}/{len(self.image_files)}')
+        print(f'previous! {self.current_image_index+1}/{len(self.image_files)}')
 
     def show_next_image(self):
         if self.current_image_index < len(self.image_files) - 1:
             self.current_image_index += 1
             self.load_current_image()
-        print(f'next! {self.current_image_index}/{len(self.image_files)}')
+        print(f'next! {self.current_image_index+1}/{len(self.image_files)}')
 
     def move_image(self, target_folder_num='none'):
         if not self.image_folder or not self.image_files:
             return
-        if target_folder_num == 'none':
-            target_folder_num = self.input_edit.text()
-        if not target_folder_num.isdigit():
-            print("请输入数字编号! 数字1代表移动到父目录外的1目录，2代表2目录！")
-            return
 
         # 获取要处理图片文件夹的父目录
-        if self.input_edit.text == '':
+        if self.parent_folder == '':
             parent_folder = os.path.dirname(self.image_folder)
         else:
-            parent_folder = self.input_edit.text
+            parent_folder = self.parent_folder
         target_folder = os.path.join(parent_folder, target_folder_num)
 
         if not os.path.exists(target_folder):
@@ -190,11 +194,11 @@ class Imagecopyer(QWidget):
         try:
             shutil.copy(current_image_path, target_folder)
             self.last_pic_path.append(os.path.join(target_folder, current_image_path.split('\\')[-1]))
-            print(f"{self.current_image_index}/{len(self.image_files)}: 已将图片{current_image_path}复制到: {target_folder}")
+            print(f"{self.current_image_index+1}/{len(self.image_files)}: 已将图片{current_image_path}复制到: {target_folder}")
             if self.current_image_index >= len(self.image_files):
                 self.current_image_index -= 1
             self.current_image_index += 1
-            self.input_edit.clear()
+            self.parent_path.clear()
             self.load_current_image()
         except IndexError:
             print('最后一张图片了！')
