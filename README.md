@@ -1,57 +1,57 @@
-## 图片预览和分类工具
+## Image Preview and Sorting Tool
 
-这是一个基于 PyQt5 的图形界面工具，用于快速预览和分类图片。
+This is a PyQt5-based graphical tool for quickly previewing and sorting images into different folders.
 
-### 功能
+### Features
 
-- **图片预览**:  浏览文件夹中的图片，支持上一张、下一张、放大、缩小等操作。
-- **快捷键**: 使用 `j` 键和 `k` 键快速切换图片，使用 `Enter` 键确认复制操作。
-- **图片分类**:  通过输入数字键 (1, 2...) 将当前图片复制到指定的目标文件夹，目标文件夹位于图片源文件夹的父目录下，以数字命名。
+- **Image preview**: Browse through images in a folder, with support for next/previous image, zoom in/out, etc.
+- **Keyboard shortcuts**: Use `j` and `k` keys to quickly switch between images, and `Enter` to confirm the copying operation.
+- **Image sorting**:  Copy the currently viewed image to a specific target folder by pressing the corresponding number key (1, 2...). Target folders are named with numbers and located in the parent directory of the source image folder.
 
-### 使用方法
+### How to Use
 
-1. **选择文件夹**: 点击 "选择文件夹" 按钮，选择包含要处理图片的文件夹。
-2. **预览图片**: 使用 "上一张"、"下一张"、"放大"、"缩小" 按钮或 `j`、`k` 快捷键浏览图片。
-3. **复制图片**: 
-    - 在输入框中输入目标文件夹的编号 (例如，输入 "1" 表示复制到名为 "1" 的文件夹)。
-    - 按下 `Enter` 键或点击 "复制" 按钮，将当前图片复制到目标文件夹，并自动切换到下一张图片。
-    - 你也可以直接按下数字键 (1, 2...) 将图片快速复制到对应的文件夹。
+1. **Select Folder**: Click the "Choose Folder" button and select the folder containing the images you want to process.
+2. **Enter Target Parent Folder**: edit the bottem text line and enter the desired target parent folder. __if you don't edit this, the parent folder is the chosed folder's parent folder__. 
+3. **Preview Images**: Use the "Previous", "Next", "Zoom In", and "Zoom Out" buttons or the `j` and `k` keys to navigate through the images.
+4. **Copy Images**:
+    - Enter the number of the target folder in the input field (e.g., enter "1" to copy to a folder named "1").
+    - Press the `Enter` key or click the "Copy" button to copy the current image to the target folder and automatically load the next image.
+    - You can also directly press the number keys (1, 2...) to quickly copy the image to the corresponding folders.
 
-### 示例
+### Example
 
-假设你有一个名为 "Photos" 的文件夹，其中包含要分类的图片，该文件夹位于 "D:\MyPictures" 目录下。
+Suppose you have a folder named "Photos" containing the images you want to sort, and this folder is located in the directory "D:\MyPictures".
 
-1. 运行程序，点击 "选择文件夹" 按钮，选择 "D:\MyPictures\Photos" 文件夹。
-2. 程序会显示 "Photos" 文件夹中的第一张图片。
-3. 预览图片，并根据需要进行放大或缩小。
-4. 如果你想将当前图片复制到 "D:\MyPictures\1" 文件夹，可以直接按下数字键 `1`，或在输入框中输入 "1" 后按下 `Enter` 键。
-5. 程序会将当前图片复制到 "D:\MyPictures\1" 文件夹，并自动加载下一张图片。
+1. Run the program and click the "Choose Folder" button. Select the "D:\MyPictures\Photos" folder.
+2. The program will display the first image in the "Photos" folder.
+3. Preview the image and zoom in or out as needed.
+4. If you want to copy the current image to the "D:\MyPictures\1" folder, you can directly press the number key `1`, or enter "1" in the input field and press `Enter`.
+5. The program will copy the current image to the "D:\MyPictures\1" folder and automatically load the next image.
 
-### 依赖
+### Requirements
 
 - Python 3.x
 - PyQt5
 - os
 - shutil
 
-### 安装依赖
+### Installation
 
 ```bash
 pip install PyQt5
 ```
 
-### 运行程序
+### Running the Program
 
 ```bash
-python main.py 
+python main.py
 ```
 
-### 注意
+### Notes
 
-- 目标文件夹会自动创建，无需手动创建。
-- 程序会将图片 **复制** 到目标文件夹，不会删除原始图片。
+- The target folders will be created automatically if they do not exist.
+- The program will **copy** the images to the target folders, the original images will not be deleted.
 
-
-## 许可证
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
