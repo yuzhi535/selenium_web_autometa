@@ -31,23 +31,17 @@
 4. 如果你想将当前图片复制到 "D:\MyPictures\1" 文件夹，可以直接按下数字键 `1`，或在输入框中输入 "1" 后按下 `Enter` 键。
 5. 程序会将当前图片复制到 "D:\MyPictures\1" 文件夹，并自动加载下一张图片。
 
-### 依赖
-
-- Python 3.x
-- PyQt5
-- os
-- shutil
 
 ### 安装依赖
 
 ```bash
-pip install PyQt5
+pip install -e .
 ```
 
 ### 运行程序
 
 ```bash
-python main.py 
+python src/selenium_web_autometa/main.py
 ```
 
 ### 注意

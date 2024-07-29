@@ -31,23 +31,17 @@ Assume that you have a folder named "Photos" which contains the pictures you wan
 4. If you want to copy the current picture to the "D:\MyPictures\1" folder, you can directly press the number key `1`, or enter "1" in the input box and press the `Enter` key.
 5. The program will copy the current picture to the "D:\MyPictures\1" folder and automatically load the next picture.
 
-### Dependencies
-
-- Python 3.x
-- PyQt5
-- os
-- shutil
 
 ### Install dependencies
 
 ```bash
-pip install PyQt5
+pip install -e .
 ```
 
 ### Run the program
 
 ```bash
-python main.py
+python src/selenium_web_autometa/main.py
 ```
 
 ### Notes

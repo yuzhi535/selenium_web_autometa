@@ -218,5 +218,6 @@ class Imagecopyer(QWidget):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     ex = Imagecopyer()
+    ex.resize(800, 600)
     ex.show()
     sys.exit(app.exec_())
