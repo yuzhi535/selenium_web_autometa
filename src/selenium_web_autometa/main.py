@@ -77,7 +77,7 @@ class Imagecopyer(QWidget):
         
         self.undo_button = QPushButton("撤销", self)
         self.undo_button.clicked.connect(self.undo)
-        self.undo_button.setShortcut('3')
+        self.undo_button.setShortcut('e')
 
         hbox1 = QHBoxLayout()
         hbox1.addWidget(self.folder_button)
@@ -193,7 +193,7 @@ class Imagecopyer(QWidget):
         )
         try:
             shutil.copy(current_image_path, target_folder)
-            self.last_pic_path.append(os.path.join(target_folder, current_image_path.split('\\')[-1]))
+            self.last_pic_path.append(os.path.join(target_folder, current_image_path.split(os.sep)[-1]))
             print(f"{self.current_image_index+1}/{len(self.image_files)}: 已将图片{current_image_path}复制到: {target_folder}")
             if self.current_image_index >= len(self.image_files):
                 self.current_image_index -= 1
